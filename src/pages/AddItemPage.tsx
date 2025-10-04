@@ -24,7 +24,7 @@ export const AddItemPage = () => {
             Back to Items
           </Link>
         </div>
-        <Card><h1 className="text-3xl font-bold text-gray-900 mb-6">Add New Item</h1><ItemForm categories={categories?.data || []} onSubmit={handleSubmit} onCancel={() => navigate('/items')} isLoading={createItem.isPending} /></Card>
+        <Card><h1 className="text-3xl font-bold text-gray-900 mb-6">Add New Item</h1><ItemForm categories={categories || []} onSubmit={handleSubmit} onCancel={() => navigate('/items')} isLoading={createItem.isPending} /></Card>
       </div>
     </Layout>
   );

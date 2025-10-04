@@ -34,8 +34,8 @@ export const CategoriesPage = () => {
     }
   };
 
-  const customCategories = categories?.data.filter(c => c.type === 'custom') || [];
-  const predefinedCategories = categories?.data.filter(c => c.type === 'predefined') || [];
+  const customCategories = categories?.filter(c => c.type === 'custom') || [];
+  const predefinedCategories = categories?.filter(c => c.type === 'predefined') || [];
 
   return (
     <Layout>

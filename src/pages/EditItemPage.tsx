@@ -35,7 +35,7 @@ export const EditItemPage = () => {
             Back to Item
           </Link>
         </div>
-        <Card><h1 className="text-3xl font-bold text-gray-900 mb-6">Edit Item</h1><ItemForm item={item} categories={categories?.data || []} onSubmit={handleSubmit} onCancel={() => navigate(`/items/${id}`)} isLoading={updateItem.isPending} /></Card>
+        <Card><h1 className="text-3xl font-bold text-gray-900 mb-6">Edit Item</h1><ItemForm item={item} categories={categories || []} onSubmit={handleSubmit} onCancel={() => navigate(`/items/${id}`)} isLoading={updateItem.isPending} /></Card>
       </div>
     </Layout>
   );

@@ -66,7 +66,7 @@ export const ItemDetail = () => {
               {item.photos.map((photo) => (
                 <img
                   key={photo.id}
-                  src={photo.url}
+                  src={`${import.meta.env.VITE_API_URL?.replace('/api/v1', '')}/${photo.filePath}`}
                   alt={item.name}
                   className="w-full h-64 object-cover rounded-lg"
                 />
@@ -90,16 +90,16 @@ export const ItemDetail = () => {
                 </div>
               )}
 
-              {item.categories && item.categories.length > 0 && (
+              {item.tags && item.tags.length > 0 && (
                 <div>
                   <span className="text-sm font-medium text-gray-500 block mb-2">Categories:</span>
                   <div className="flex flex-wrap gap-2">
-                    {item.categories.map((category, idx) => (
+                    {item.tags.map((tag) => (
                       <span
-                        key={idx}
+                        key={tag.categoryId}
                         className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
                       >
-                        {category}
+                        {tag.category.name}
                       </span>
                     ))}
                   </div>

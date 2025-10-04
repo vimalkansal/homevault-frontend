@@ -11,7 +11,7 @@ export const Dashboard = () => {
 
   const { data: items, isLoading, error } = useQuery({
     queryKey: ['items', debouncedSearch],
-    queryFn: () => itemService.getItems(debouncedSearch || undefined),
+    queryFn: () => itemService.getItems({ search: debouncedSearch || undefined }),
   });
 
   const handleSearch = (e: React.FormEvent) => {
@@ -82,13 +82,13 @@ export const Dashboard = () => {
 
         {isLoading ? (
           <div className="text-center py-12">Loading items...</div>
-        ) : items && items.length > 0 ? (
+        ) : items && items.data && items.data.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {items.map((item) => (
+            {items.data.map((item) => (
               <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden">
                 {item.photos && item.photos.length > 0 ? (
                   <img
-                    src={item.photos[0].url}
+                    src={`${import.meta.env.VITE_API_URL?.replace('/api/v1', '')}/${item.photos[0].filePath}`}
                     alt={item.name}
                     className="w-full h-48 object-cover"
                   />
@@ -105,14 +105,14 @@ export const Dashboard = () => {
                   {item.description && (
                     <p className="text-sm text-gray-600 mb-2 line-clamp-2">{item.description}</p>
                   )}
-                  {item.categories && item.categories.length > 0 && (
+                  {item.tags && item.tags.length > 0 && (
                     <div className="flex flex-wrap gap-1 mb-3">
-                      {item.categories.map((category, idx) => (
+                      {item.tags.map((tag) => (
                         <span
-                          key={idx}
+                          key={tag.categoryId}
                           className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded"
                         >
-                          {category}
+                          {tag.category.name}
                         </span>
                       ))}
                     </div>

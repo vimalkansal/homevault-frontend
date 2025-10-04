@@ -78,7 +78,7 @@ export const ItemsPage = () => {
       <div className="flex flex-col lg:flex-row gap-6">
         <aside className="w-full lg:w-64 flex-shrink-0">
           <ItemFilters
-            categories={categories?.data || []}
+            categories={categories || []}
             selectedCategories={selectedCategories}
             onCategoriesChange={setSelectedCategories}
             sortBy={sortBy}
