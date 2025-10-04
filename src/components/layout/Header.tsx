@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { ProfileAvatar } from '../profile/ProfileAvatar';
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -75,9 +76,7 @@ export const Header = ({ onMenuClick }: HeaderProps) => {
                   </p>
                   <p className="text-xs text-gray-500">{user.email}</p>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold">
-                  {user.fullName.charAt(0).toUpperCase()}
-                </div>
+                <ProfileAvatar user={user} size={40} />
                 <svg
                   className={`h-5 w-5 text-gray-600 transition-transform ${
                     showUserMenu ? 'rotate-180' : ''

@@ -43,7 +43,7 @@ export const authService = {
    * Get current user profile
    */
   async getProfile(): Promise<User> {
-    const response = await api.get<UserResponse>('/auth/me');
+    const response = await api.get<UserResponse>('/users/profile');
 
     // Update stored user data
     if (response.data.success) {

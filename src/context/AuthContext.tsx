@@ -29,9 +29,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const savedToken = localStorage.getItem('token');
       const savedUser = authService.getStoredUser();
 
-      if (savedToken && savedUser) {
+      if (savedToken) {
         setToken(savedToken);
-        setUser(savedUser);
+
+        if (savedUser) {
+          setUser(savedUser);
+        }
 
         // Validate token by fetching fresh profile
         try {
