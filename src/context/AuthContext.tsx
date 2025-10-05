@@ -25,43 +25,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Initialize auth state from localStorage
   useEffect(() => {
-    console.log('[AuthContext] useEffect running - initializing auth');
-
     const initAuth = async () => {
-      console.log('[AuthContext] initAuth started');
       const savedToken = localStorage.getItem('token');
       const savedUser = authService.getStoredUser();
 
-      console.log('[AuthContext] savedToken:', !!savedToken);
-      console.log('[AuthContext] savedUser:', !!savedUser);
-
       if (savedToken) {
-        console.log('[AuthContext] Token found, setting token');
         setToken(savedToken);
 
         if (savedUser) {
-          console.log('[AuthContext] Cached user found, setting user');
           setUser(savedUser);
         }
 
         // Validate token by fetching fresh profile
-        console.log('[AuthContext] About to fetch profile from API');
         try {
           const freshProfile = await authService.getProfile();
-          console.log('[AuthContext] Profile fetched successfully:', freshProfile);
           setUser(freshProfile);
         } catch (error) {
           // Token invalid, clear auth state
-          console.error('[AuthContext] Failed to validate token:', error);
+          console.error('Failed to validate token:', error);
           authService.logout();
           setToken(null);
           setUser(null);
         }
-      } else {
-        console.log('[AuthContext] No token found in localStorage');
       }
 
-      console.log('[AuthContext] initAuth complete, setting loading to false');
       setLoading(false);
     };
 
